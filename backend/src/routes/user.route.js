@@ -1,11 +1,23 @@
 import express from "express";
-import { loginUser, registerUser } from "../controllers/auth.controller.js";
-import { loginValidator, registrationValidator } from "../validators/user.validator.js";
+import {
+  getAllUser,
+  getUserById,
+  loginUser,
+  logoutUser,
+  registerUser,
+} from "../controllers/auth.controller.js";
+import {
+  loginValidator,
+  registrationValidator,
+} from "../validators/user.validator.js";
+import { checkRole, verifyJWT } from "../middleware/verifyJWT.js";
 
 const router = express.Router();
 
-router.route("/register-user").post(registrationValidator(),registerUser);
-router.route("/login-user").post(loginValidator(),loginUser);
-
+router.route("/register-user").post(registrationValidator(), registerUser);
+router.route("/login-user").post(loginValidator(), loginUser);
+router.route("/logout-user").get(verifyJWT, logoutUser);
+router.route("/all-user").get(verifyJWT, checkRole, getAllUser);
+router.route("/all-user/:userId").get(verifyJWT, checkRole, getUserById);
 
 export default router;

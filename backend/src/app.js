@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 import cors from "cors";
 
 // Data Base Route
@@ -21,6 +22,8 @@ app.use(
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
   }),
 );
+
+app.use(cookieParser());
 
 app.use(express.json());
 app.use(

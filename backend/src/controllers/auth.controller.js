@@ -77,4 +77,52 @@ const loginUser = asyncHandler(async (req, res) => {
   }
 });
 
-export { registerUser, loginUser };
+const logoutUser = asyncHandler(async (req, res) => {
+  await User.findByIdAndUpdate(
+    req.user._id,
+    { $set: { refreshToken: undefined } },
+    { returnDocument: "after" },
+  );
+
+  const options = {
+    httpOnly: true,
+    secure: true,
+  };
+
+  return res
+    .status(200)
+    .clearCookie("refreshToken", options)
+    .json({ msg: "User Logged Out Successfully" });
+});
+
+const getAllUser = asyncHandler(async (req, res) => {
+  try {
+    const allUser = await User.find();
+
+    return res.status(200).json({ msg: "All User", allUser });
+  } catch (error) {
+    console.log(`Error while creating User ${error.message}`);
+  }
+});
+
+const getUserById = asyncHandler(async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    if (!userId) {
+      return res.status(404).json({ msg: "User Id Not Found" });
+    }
+
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(500).json({ msg: "Internal Server Error" });
+    }
+
+    return res.status(200).json({ mag: "User Id Fetch Successfully", user });
+  } catch (error) {
+    console.log(`Error while creating User ${error.message}`);
+  }
+});
+
+export { registerUser, loginUser, logoutUser, getAllUser, getUserById };
