@@ -125,4 +125,79 @@ const getUserById = asyncHandler(async (req, res) => {
   }
 });
 
-export { registerUser, loginUser, logoutUser, getAllUser, getUserById };
+const getProfile = asyncHandler(async (req, res) => {
+  try {
+    const userId = req.user;
+
+    if (!userId) {
+      return res.status(404).json({ msg: "User Id Not Found" });
+    }
+
+    const user = await User.findById(userId).select("-password -refreshToken");
+
+    if (!user) {
+      return res.status(500).json({ msg: "Internal Server Error" });
+    }
+
+    return res
+      .status(200)
+      .json({ msg: "Get Profile Fetch Successfully", user });
+  } catch (error) {
+    console.log(`Error while creating User ${error.message}`);
+  }
+});
+
+const updateUser = asyncHandler(async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    if (!userId) {
+      return res.status(404).json({ msg: "User Id Not Found" });
+    }
+
+    const user = await User.findByIdAndUpdate(userId);
+
+    Object.assign(user, req.body);
+
+    await user.save();
+
+    if (!user) {
+      return res.status(500).json({ msg: "Internal server Error" });
+    }
+
+    return res.status(200).json({ msg: "User Updated Successfully", user });
+  } catch (error) {
+    console.log(`Error while creating User ${error.message}`);
+  }
+});
+
+const deleteUser = asyncHandler(async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    if (!userId) {
+      return res.status(404).json({ msg: "User Id Not Found" });
+    }
+
+    const user = await User.findByIdAndDelete(userId);
+
+    if (!user) {
+      return res.status(500).json({ smg: "Internal Server Error" });
+    }
+
+    return res.status(200).json({ smg: "User Deleted Successfully", user });
+  } catch (error) {
+    console.log(`Error while creating User ${error}`);
+  }
+});
+
+export {
+  registerUser,
+  loginUser,
+  logoutUser,
+  getAllUser,
+  getUserById,
+  getProfile,
+  updateUser,
+  deleteUser,
+};
