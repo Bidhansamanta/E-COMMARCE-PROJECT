@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import { User } from "../models/user.model.js";
 
+// Verify JWT
 const verifyJWT = async (req, res, next) => {
   try {
     const token =
@@ -28,6 +29,8 @@ const verifyJWT = async (req, res, next) => {
   }
 };
 
+
+// Check Role
 const checkRole = async (req, res, next) => {
   try {
     const { user } = req;

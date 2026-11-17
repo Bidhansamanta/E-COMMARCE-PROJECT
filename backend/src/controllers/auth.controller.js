@@ -3,6 +3,7 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
+// Register User 
 const registerUser = asyncHandler(async (req, res) => {
   try {
     const { userName, phoneNumber, password } = req.body;
@@ -36,6 +37,8 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 });
 
+
+// Login User
 const loginUser = asyncHandler(async (req, res) => {
   try {
     const { phoneNumber, password } = req.body;
@@ -77,6 +80,8 @@ const loginUser = asyncHandler(async (req, res) => {
   }
 });
 
+
+// Louout User
 const logoutUser = asyncHandler(async (req, res) => {
   await User.findByIdAndUpdate(
     req.user._id,
@@ -95,6 +100,8 @@ const logoutUser = asyncHandler(async (req, res) => {
     .json({ msg: "User Logged Out Successfully" });
 });
 
+
+// All User
 const getAllUser = asyncHandler(async (req, res) => {
   try {
     const allUser = await User.find();
@@ -105,6 +112,8 @@ const getAllUser = asyncHandler(async (req, res) => {
   }
 });
 
+
+// Get User By Id
 const getUserById = asyncHandler(async (req, res) => {
   try {
     const { userId } = req.params;
@@ -125,6 +134,8 @@ const getUserById = asyncHandler(async (req, res) => {
   }
 });
 
+
+// Get Profile
 const getProfile = asyncHandler(async (req, res) => {
   try {
     const userId = req.user;
@@ -147,6 +158,8 @@ const getProfile = asyncHandler(async (req, res) => {
   }
 });
 
+
+// Update User
 const updateUser = asyncHandler(async (req, res) => {
   try {
     const { userId } = req.params;
@@ -171,6 +184,8 @@ const updateUser = asyncHandler(async (req, res) => {
   }
 });
 
+
+// Delete User
 const deleteUser = asyncHandler(async (req, res) => {
   try {
     const { userId } = req.params;
