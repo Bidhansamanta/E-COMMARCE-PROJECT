@@ -1,0 +1,203 @@
+import { User } from "../models/user.model.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+
+const registerUser = asyncHandler(async (req, res) => {
+  try {
+    const { userName, phoneNumber, password } = req.body;
+
+    const isPhoneNumberAlreadyExits = await User.findOne({ phoneNumber });
+
+    if (isPhoneNumberAlreadyExits) {
+      throw new Error("This Phone Number is Already Exits");
+    }
+
+    const hashPassword = await bcrypt.hash(password, 10);
+
+    const newUser = await User.create({
+      userName,
+      phoneNumber,
+      password: hashPassword,
+    });
+
+    if (!newUser) {
+      return res.status(500).json({
+        msg: "Internal Server Error",
+      });
+    }
+
+    return res.status(201).json({
+      msg: "User Register Successfully",
+      newUser,
+    });
+  } catch (error) {
+    console.log(`Error while creating User ${error}`);
+  }
+});
+
+const loginUser = asyncHandler(async (req, res) => {
+  try {
+    const { phoneNumber, password } = req.body;
+
+    const userInfo = await User.findOne({ phoneNumber });
+
+    if (!userInfo) {
+      return res.status(404).json({ msg: "User Not Found" });
+    }
+
+    const isPasswordCorrect = await bcrypt.compare(password, userInfo.password);
+
+    if (isPasswordCorrect) {
+      return res.status(409).json({ msg: "InCorrect Password" });
+    }
+
+    const refreshToken = jwt.sign(
+      { id: userInfo._id },
+      process.env.jwt_SECRET,
+      {
+        expiresIn: process.env.jwt_SECRET_IN,
+      },
+    );
+
+    userInfo.refreshToken = refreshToken;
+    await userInfo.save({ validateBeforeSave: false });
+
+    const options = {
+      httpOnly: true,
+      secure: true,
+    };
+
+    return res
+      .status(200)
+      .cookie("refreshToken", refreshToken, options)
+      .json({ msg: "User Login Successfully", userInfo });
+  } catch (error) {
+    console.log(`Error while creating User ${error.message}`);
+  }
+});
+
+const logoutUser = asyncHandler(async (req, res) => {
+  await User.findByIdAndUpdate(
+    req.user._id,
+    { $set: { refreshToken: undefined } },
+    { returnDocument: "after" },
+  );
+
+  const options = {
+    httpOnly: true,
+    secure: true,
+  };
+
+  return res
+    .status(200)
+    .clearCookie("refreshToken", options)
+    .json({ msg: "User Logged Out Successfully" });
+});
+
+const getAllUser = asyncHandler(async (req, res) => {
+  try {
+    const allUser = await User.find();
+
+    return res.status(200).json({ msg: "All User", allUser });
+  } catch (error) {
+    console.log(`Error while creating User ${error.message}`);
+  }
+});
+
+const getUserById = asyncHandler(async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    if (!userId) {
+      return res.status(404).json({ msg: "User Id Not Found" });
+    }
+
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(500).json({ msg: "Internal Server Error" });
+    }
+
+    return res.status(200).json({ mag: "User Id Fetch Successfully", user });
+  } catch (error) {
+    console.log(`Error while creating User ${error.message}`);
+  }
+});
+
+const getProfile = asyncHandler(async (req, res) => {
+  try {
+    const userId = req.user;
+
+    if (!userId) {
+      return res.status(404).json({ msg: "User Id Not Found" });
+    }
+
+    const user = await User.findById(userId).select("-password -refreshToken");
+
+    if (!user) {
+      return res.status(500).json({ msg: "Internal Server Error" });
+    }
+
+    return res
+      .status(200)
+      .json({ msg: "Get Profile Fetch Successfully", user });
+  } catch (error) {
+    console.log(`Error while creating User ${error.message}`);
+  }
+});
+
+const updateUser = asyncHandler(async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    if (!userId) {
+      return res.status(404).json({ msg: "User Id Not Found" });
+    }
+
+    const user = await User.findByIdAndUpdate(userId);
+
+    Object.assign(user, req.body);
+
+    await user.save();
+
+    if (!user) {
+      return res.status(500).json({ msg: "Internal server Error" });
+    }
+
+    return res.status(200).json({ msg: "User Updated Successfully", user });
+  } catch (error) {
+    console.log(`Error while creating User ${error.message}`);
+  }
+});
+
+const deleteUser = asyncHandler(async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    if (!userId) {
+      return res.status(404).json({ msg: "User Id Not Found" });
+    }
+
+    const user = await User.findByIdAndDelete(userId);
+
+    if (!user) {
+      return res.status(500).json({ smg: "Internal Server Error" });
+    }
+
+    return res.status(200).json({ smg: "User Deleted Successfully", user });
+  } catch (error) {
+    console.log(`Error while creating User ${error}`);
+  }
+});
+
+export {
+  registerUser,
+  loginUser,
+  logoutUser,
+  getAllUser,
+  getUserById,
+  getProfile,
+  updateUser,
+  deleteUser,
+};
