@@ -12,10 +12,6 @@ const createProduct = asyncHandler(async (req, res) => {
   try {
     const { title, description, price, category } = req.body;
 
-    if (!title || !description || !price || !category) {
-      return res.status(400).json({ msg: "All field are required to procced" });
-    }
-
     const isProductAlreadyExits = await Product.findOne({ title, description });
 
     if (isProductAlreadyExits) {
