@@ -12,7 +12,7 @@ import { creationProductValidator } from "../validators/product.validator.js";
 const router = express.Router();
 
 router.route("/create-product").post(creationProductValidator(), createProduct);
-router.route("/all-products").get(verifyJWT, checkRole, getAllProducts);
+router.route("/all-products").get(getAllProducts);
 router.route("/all-products/:productId").get(getProductById);
 router.route("/update-product/:productId").put(updateProduct);
 router.route("/delete-product/:productId").delete(deleteProduct);

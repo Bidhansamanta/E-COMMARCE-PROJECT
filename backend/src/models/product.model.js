@@ -1,33 +1,36 @@
 import { model, Schema } from "mongoose";
 
 // Product Schema
-const productSchema = new Schema({
-  title : {
-    type : String,
-    required : true
+const productSchema = new Schema(
+  {
+    title: {
+      type: String,
+      required: true,
+    },
+    description: {
+      type: String,
+      required: true,
+    },
+    image: {
+      type: String,
+      required: true,
+    },
+    price: {
+      type: Number,
+      required: true,
+    },
+    category: {
+      type: String,
+      required: true,
+    },
+    sku: {
+      type: String,
+      unique: true,
+    },
   },
-  description :{
-    type : String,
-    required : true,
-  },
-  image : {
-    type : String,
-  },
-  price : {
-    type : Number,
-    required : true
-  },
-  category : {
-    type : String,
-    required : true
-  },
-  sku : {
-    type : String,
-    unique : true
-  }
-},{timestamps : true});
-
+  { timestamps: true },
+);
 
 const Product = model("product", productSchema);
 
-export {Product};
+export { Product };

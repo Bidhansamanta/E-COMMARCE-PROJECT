@@ -10,7 +10,7 @@ const genarateSkU = async (category) => {
 // Create Product
 const createProduct = asyncHandler(async (req, res) => {
   try {
-    const { title, description, price, category } = req.body;
+    const { title, description, price, category, image } = req.body;
 
     const isProductAlreadyExits = await Product.findOne({ title, description });
 
@@ -25,6 +25,7 @@ const createProduct = asyncHandler(async (req, res) => {
       description,
       price,
       category,
+      image,
       sku,
     });
 
