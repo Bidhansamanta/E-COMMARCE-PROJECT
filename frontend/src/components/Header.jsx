@@ -46,10 +46,10 @@ function Header() {
                 className={({ isActive }) =>
                   isActive ? "text-red-900" : "text-black"
                 }
-                to="/shop"
+                to="/products"
                 onClick={() => setIsOpen(false)}
               >
-                Shop
+                Products
               </NavLink>
             </li>
 
@@ -62,18 +62,6 @@ function Header() {
                 onClick={() => setIsOpen(false)}
               >
                 Categories
-              </NavLink>
-            </li>
-
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? "text-red-900" : "text-black"
-                }
-                to="/deals"
-                onClick={() => setIsOpen(false)}
-              >
-                Deals
               </NavLink>
             </li>
 
