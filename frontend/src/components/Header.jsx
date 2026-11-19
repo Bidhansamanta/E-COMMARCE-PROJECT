@@ -6,7 +6,7 @@ function Header() {
 
   return (
     <>
-      <header className="relative flex justify-around items-center h-[60px] px-4 sm:px-6 md:px-10 shadow-md bg-white">
+      <header className="relative flex justify-around items-center h-[60px] px-4 sm:px-6 md:px-10 shadow-md bg-white sticky top-15">
 
         {/* Mobile Hamburger */}
         <button
@@ -74,6 +74,18 @@ function Header() {
                 onClick={() => setIsOpen(false)}
               >
                 About
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "text-red-900" : "text-black"
+                }
+                to="/addproduct"
+                onClick={() => setIsOpen(false)}
+              >
+                Add Product
               </NavLink>
             </li>
           </ul>

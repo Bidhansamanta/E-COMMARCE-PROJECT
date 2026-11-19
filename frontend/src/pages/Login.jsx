@@ -1,10 +1,13 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [userInfo, setUserInfo] = useState({
     phoneNumber: "",
     password: "",
   });
+
+  const usenavigate = useNavigate();
 
   const URL = "http://localhost:8005/api/v1/user/login-user";
 
@@ -21,6 +24,10 @@ function Login() {
       .then((res) => res.json())
       .then(() => setUserInfo({ phoneNumber: "", password: "" }))
       .catch((error) => console.log(error));
+
+    setTimeout(() => {
+      usenavigate("/");
+    }, 1000);
   }
 
   return (

@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function SignUp() {
   const [userInfo, setUserInfo] = useState({
@@ -6,6 +8,8 @@ function SignUp() {
     phoneNumber: "",
     password: "",
   });
+
+  const usenavigate = useNavigate();
 
   const URL = "http://localhost:8005/api/v1/user/register-user";
 
@@ -22,6 +26,12 @@ function SignUp() {
       .then((res) => res.json())
       .then(() => setUserInfo({ userName: "", phoneNumber: "", password: "" }))
       .catch((error) => console.log(error.message));
+
+    alert("User Register Successfully");
+
+    setTimeout(() => {
+      usenavigate("/login");
+    }, 2000);
   }
 
   return (
@@ -131,7 +141,7 @@ function SignUp() {
             <p className="text-center text-sm text-gray-600 mt-7">
               Already have an account?
               <span className="text-orange-500 font-semibold cursor-pointer hover:underline ml-1">
-                Login
+                <Link to="/login">Login</Link>
               </span>
             </p>
           </div>
