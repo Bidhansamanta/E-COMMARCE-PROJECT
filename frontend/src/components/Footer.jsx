@@ -1,12 +1,11 @@
+import { NavLink } from "react-router-dom";
+
 function Footer() {
   return (
     <footer className="bg-gray-900 text-gray-300">
-
       {/* Main Footer */}
       <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 py-12">
-
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-
           {/* Brand */}
           <div>
             <h2 className="text-3xl font-bold text-white">
@@ -14,8 +13,8 @@ function Footer() {
             </h2>
 
             <p className="mt-4 text-sm leading-7 text-gray-400 max-w-xs">
-              Discover products you love. Shop your favorite
-              collections and enjoy a simple shopping experience.
+              Discover products you love. Shop your favorite collections and
+              enjoy a simple shopping experience.
             </p>
 
             {/* Social Icons */}
@@ -62,29 +61,44 @@ function Footer() {
 
             <ul className="space-y-3 text-sm">
               <li>
-                <a href="/" className="hover:text-indigo-400 transition">
+                <NavLink
+                  to="/"
+                  className={({ isActive }) =>
+                    isActive ? "text-red-600" : "text-white"
+                  }
+                >
                   Home
-                </a>
+                </NavLink>
               </li>
               <li>
-                <a href="/shop" className="hover:text-indigo-400 transition">
-                  Shop
-                </a>
+                <NavLink
+                  to="/products"
+                  className={({ isActive }) =>
+                    isActive ? "text-red-600" : "text-white"
+                  }
+                >
+                  Products
+                </NavLink>
               </li>
               <li>
-                <a href="/categories" className="hover:text-indigo-400 transition">
-                  Categories
-                </a>
+                <NavLink
+                  to="/categories"
+                  className={({ isActive }) =>
+                    isActive ? "text-red-600" : "text-white"
+                  }
+                >
+                  Category
+                </NavLink>
               </li>
               <li>
-                <a href="/deals" className="hover:text-indigo-400 transition">
-                  Deals & Offers
-                </a>
-              </li>
-              <li>
-                <a href="/about" className="hover:text-indigo-400 transition">
+                <NavLink
+                  to="/about"
+                  className={({ isActive }) =>
+                    isActive ? "text-red-600" : "text-white"
+                  }
+                >
                   About Us
-                </a>
+                </NavLink>
               </li>
             </ul>
           </div>
@@ -97,9 +111,14 @@ function Footer() {
 
             <ul className="space-y-3 text-sm">
               <li>
-                <a href="/contact" className="hover:text-indigo-400 transition">
+                <NavLink
+                  to="/contact"
+                  className={({ isActive }) =>
+                    isActive ? "text-red-600" : "text-white"
+                  }
+                >
                   Contact Us
-                </a>
+                </NavLink>
               </li>
               <li>
                 <a href="/faq" className="hover:text-indigo-400 transition">
@@ -107,7 +126,10 @@ function Footer() {
                 </a>
               </li>
               <li>
-                <a href="/shipping" className="hover:text-indigo-400 transition">
+                <a
+                  href="/shipping"
+                  className="hover:text-indigo-400 transition"
+                >
                   Shipping Information
                 </a>
               </li>
@@ -131,7 +153,8 @@ function Footer() {
             </h3>
 
             <p className="text-sm text-gray-400 leading-6 mb-4">
-              Subscribe to receive updates about new products and special offers.
+              Subscribe to receive updates about new products and special
+              offers.
             </p>
 
             <form
@@ -154,14 +177,11 @@ function Footer() {
               </button>
             </form>
           </div>
-
         </div>
 
         {/* Divider */}
         <div className="border-t border-gray-800 mt-12 pt-6">
-
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
-
             <p className="text-center md:text-left">
               © {new Date().getFullYear()} BShop. All rights reserved.
             </p>
@@ -175,9 +195,7 @@ function Footer() {
                 Privacy Policy
               </a>
             </div>
-
           </div>
-
         </div>
       </div>
     </footer>

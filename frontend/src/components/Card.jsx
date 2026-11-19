@@ -16,7 +16,7 @@ function Card({ item }) {
       <div className="p-5">
 
         <div className="mb-3">
-          <span className="text-xs font-semibold uppercase tracking-wider text-indigo-600">
+          <span className="text-xs font-semibold bg-red-300 px-4 py-2 rounded-full uppercase tracking-wider text-indigo-900">
             {category}
           </span>
         </div>

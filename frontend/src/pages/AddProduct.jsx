@@ -35,20 +35,25 @@ function AddProduct() {
   }
 
   return (
-    <form className="max-w-md mx-auto p-6 space-y-4" onSubmit={onsubmitHandler}>
+    <form
+      className="max-w-md mx-auto p-5 space-y-4 "
+      onSubmit={onsubmitHandler}
+    >
       <h1 className="text-center font-bold text-3xl">Add Products</h1>
+      <label className=" text-lg font-semibold">Product title</label>
       <input
         type="text"
-        placeholder="Product title..."
+        placeholder="Enter your product title..."
         name="title"
         required
         value={product.title}
         onChange={(e) => setProduct({ ...product, title: e.target.value })}
-        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="w-full px-3 py-2 border  border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
 
+      <label className=" text-lg font-semibold">Product description</label>
       <textarea
-        placeholder="Product description..."
+        placeholder="Enter your product description..."
         rows="3"
         required
         value={product.description}
@@ -58,6 +63,7 @@ function AddProduct() {
         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
 
+      <label className=" text-lg font-semibold">Product image</label>
       <input
         type="text"
         placeholder="Image URL"
@@ -67,6 +73,7 @@ function AddProduct() {
         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
 
+      <label className=" text-lg font-semibold">Product price</label>
       <input
         type="number"
         name="price"
@@ -77,6 +84,7 @@ function AddProduct() {
         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
 
+      <label className=" text-lg font-semibold">Product category</label>
       <input
         type="text"
         name="category"
@@ -89,7 +97,7 @@ function AddProduct() {
 
       <button
         type="submit"
-        className="bg-blue-700 px-4 py-2 text-center text-white font-semibold rounded-lg"
+        className="bg-blue-700 px-4 py-2 text-white font-semibold rounded-lg"
       >
         Submit
       </button>
