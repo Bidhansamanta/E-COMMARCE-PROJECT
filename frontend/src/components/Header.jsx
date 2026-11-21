@@ -6,7 +6,7 @@ function Header() {
 
   return (
     <>
-      <header className="relative flex justify-around items-center h-[60px] px-4 sm:px-6 md:px-10 shadow-md bg-white sticky top-15">
+      <header className="relative flex justify-around items-center h-[60px] px-4 sm:px-6 md:px-10 shadow-md bg-gray-200 sticky top-15">
 
         {/* Mobile Hamburger */}
         <button

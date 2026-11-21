@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function Navbar() {
   return (
@@ -7,25 +7,27 @@ function Navbar() {
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 md:gap-0 md:h-[60px] py-2 md:py-0">
           {/* Logo */}
           <div className="flex justify-between items-center w-full md:w-auto">
-            <h1 className="text-lg md:text-xl font-bold tracking-wide">
-              B<span className="text-blue-400">Shop</span>
-            </h1>
+            <NavLink to="/">
+              <h1 className="text-lg md:text-xl font-bold tracking-wide">
+                B<span className="text-blue-400">Shop</span>
+              </h1>
+            </NavLink>
 
             {/* Mobile Buttons */}
             <div className="flex md:hidden items-center gap-2">
-              <Link
+              <NavLink
                 to="/signup"
                 className="px-3 py-1.5 text-sm font-medium hover:text-blue-300"
               >
                 Sign Up
-              </Link>
+              </NavLink>
 
-              <Link
+              <NavLink
                 to="/login"
                 className="px-4 py-1.5 text-sm font-medium bg-blue-600 hover:bg-blue-500 rounded-lg"
               >
                 Login
-              </Link>
+              </NavLink>
             </div>
           </div>
 
@@ -40,19 +42,19 @@ function Navbar() {
 
           {/* Desktop Buttons */}
           <div className="hidden md:flex items-center gap-4">
-            <Link
+            <NavLink
               to="/signup"
               className="px-4 py-1.5 text-sm font-medium hover:text-blue-300"
             >
               Sign Up
-            </Link>
+            </NavLink>
 
-            <Link
+            <NavLink
               to="/login"
               className="px-4 py-1.5 text-sm font-medium bg-blue-600 hover:bg-blue-500 rounded-lg"
             >
               Login
-            </Link>
+            </NavLink>
           </div>
         </div>
       </div>

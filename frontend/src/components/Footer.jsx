@@ -20,7 +20,8 @@ function Footer() {
             {/* Social Icons */}
             <div className="flex items-center gap-4 mt-6">
               <a
-                href="#"
+                href="https://www.facebook.com/share/1CCfNGw4sV/"
+                target="_blank"
                 aria-label="Facebook"
                 className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-indigo-600 hover:text-white transition"
               >
@@ -28,7 +29,8 @@ function Footer() {
               </a>
 
               <a
-                href="#"
+                href="https://www.instagram.com/mr._bidhan_7998?bqrl=aW8yb3ByNzloeG4z"
+                target="_blank"
                 aria-label="Instagram"
                 className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-pink-600 hover:text-white transition"
               >
@@ -36,7 +38,8 @@ function Footer() {
               </a>
 
               <a
-                href="#"
+                href="https://x.com/BidhanSamabgye"
+                target="_blank"
                 aria-label="Twitter"
                 className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-sky-500 hover:text-white transition"
               >
@@ -44,7 +47,8 @@ function Footer() {
               </a>
 
               <a
-                href="#"
+                href="https://www.youtube.com/@MoumitaSantra-r5n" 
+                target="_blank"
                 aria-label="YouTube"
                 className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-red-600 hover:text-white transition"
               >
